@@ -3,30 +3,32 @@ import { TextField } from '@mui/material';
 
 const InputField = ({
     label = '',
-    helperText = ' ',
     placeholder = '',
     valiant = 'outlined',
     validation = null,
+    type = 'text',
+    value = '',
+    handleChange = null,
 }) => {
-    const [value, setValue] = useState('');
     const [isError, setIsError] = useState(false);
     const handleValue = (inputValue) => {
         if (validation !== null) {
             setIsError(validation(inputValue));
         }
     };
+
     return (
         <>
             <TextField
-                error={isError}
+                error={isError && value !== ''}
                 label={label}
                 placeholder={placeholder}
                 variant={valiant}
-                helperText={helperText}
                 value={value}
-                sx={{ width: 1, margin: 1 }}
+                sx={{ width: 1, marginBottom: 4 }}
+                type={type}
                 onChange={(e) => {
-                    setValue(e.target.value);
+                    handleChange(e.target.value);
                     handleValue(e.target.value);
                 }}
             />
