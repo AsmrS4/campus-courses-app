@@ -8,6 +8,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import GroupsIcon from '@mui/icons-material/Groups';
+import ClassIcon from '@mui/icons-material/Class';
+import SchoolIcon from '@mui/icons-material/School';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = React.useState(false);
@@ -17,12 +23,14 @@ export default function TemporaryDrawer() {
     };
 
     const DrawerList = (
-        <Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer(false)}>
+        <Box sx={{ width: 300 }} role='presentation' onClick={toggleDrawer(false)}>
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Профиль', 'Выйти'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
-                            <ListItemIcon></ListItemIcon>
+                            <ListItemIcon sx={{ color: '#336caf' }}>
+                                {index === 0 ? <AccountCircleIcon /> : <LogoutIcon />}
+                            </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
                     </ListItem>
@@ -30,10 +38,18 @@ export default function TemporaryDrawer() {
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                {['Группы', 'Мои курсы', 'Преподаваемые курсы'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
-                            <ListItemIcon></ListItemIcon>
+                            <ListItemIcon sx={{ color: '#336caf' }}>
+                                {index === 0 ? (
+                                    <GroupsIcon />
+                                ) : index === 1 ? (
+                                    <ClassIcon />
+                                ) : (
+                                    <SchoolIcon />
+                                )}
+                            </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
                     </ListItem>
@@ -44,8 +60,10 @@ export default function TemporaryDrawer() {
 
     return (
         <>
-            <Button onClick={toggleDrawer(true)}>Click</Button>
-            <Drawer open={open} onClose={toggleDrawer(false)}>
+            <Button onClick={toggleDrawer(true)} sx={{ color: '#fff' }}>
+                <MenuIcon sx={{ height: 36, width: 36 }} />
+            </Button>
+            <Drawer anchor='left' open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
         </>

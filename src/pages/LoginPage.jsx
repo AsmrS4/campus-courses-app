@@ -29,6 +29,7 @@ const LoginPage = () => {
         });
 
         if (result.token) {
+            console.log(result.token);
             localStorage.setItem('token', result.token);
         } else {
             ErrorToast('Неверный логин или пароль');
