@@ -12,7 +12,9 @@ function App() {
                 <Routes>
                     <Route path='/login' element={<LoginPage />} />
                     <Route path='/registration' element={<RegistrationPage />} />
-                    <Route path='/groups' element={<GroupsPage />} />
+                    <Route path='/groups' element={<GroupsPage />}>
+                        <Route path=':id' element={<GroupsPage />} />
+                    </Route>
                 </Routes>
             </main>
         </>

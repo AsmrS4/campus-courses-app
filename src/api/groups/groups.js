@@ -8,7 +8,9 @@ export const getCourses = async() => {
                 'Authorization': 'Bearer ' + token
             }
         })
-        return response.json()
+        if(response.ok) {
+            return response.json();
+        }
     } catch (error) {
         console.error(error)
     }
