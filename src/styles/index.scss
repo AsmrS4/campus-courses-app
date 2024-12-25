@@ -45,7 +45,7 @@ main {
 }
 
 .authForm {
-    @include flex-column-y;
+    @include flex-column;
     height: 468px;
     max-width: 468px;
     box-sizing: border-box;
