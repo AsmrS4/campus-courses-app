@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Link } from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 
 import InputField from '../components/InputField/InputField';
@@ -98,7 +98,7 @@ const RegistrationPage = () => {
                         </Button>
                         <div className='link'>
                             <span>Уже есть аккаунт?</span>
-                            <Link>Войти</Link>
+                            <Link to={'/login'}>Войти</Link>
                         </div>
                     </div>
                 </form>
