@@ -43,7 +43,7 @@ export const loginUser = async(data) => {
 export const logoutUser = async() => {
     let token = localStorage.getItem('token');
     try {
-        const response = await fetch(`${process.env.REACT_APP_API}/logout`, {
+        await fetch(`${process.env.REACT_APP_API}/logout`, {
             method: 'POST',
             headers: {
                 'Accept': 'text/plain',
@@ -51,7 +51,7 @@ export const logoutUser = async() => {
                 'Authorization': 'Bearer' + token
             }
         })
-        return response.json();
+        localStorage.clear();
     } catch (error) {
         console.error('Запрос завершился с ошибкой: ' + error)
     }

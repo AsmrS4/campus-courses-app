@@ -14,4 +14,23 @@ export const getCourses = async() => {
     } catch (error) {
         console.error(error)
     }
-}  
+} 
+
+
+export const getCourseById = async(id) => {
+    let token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API}/groups/${id}`, {
+            method: 'GET',
+            headers: {
+                'Accept': '*/*',
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        if(response.ok) {
+            return response.json();
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}

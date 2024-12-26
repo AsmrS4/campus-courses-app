@@ -13,24 +13,56 @@ const bull = (
     </Box>
 );
 
-export default function GroupCard() {
+export default function GroupCard({
+    id,
+    maximumStudentsCount = 0,
+    remainingSlotsCount = 0,
+    name = '',
+    semester = '',
+    startYear = 0,
+    status = '',
+}) {
+    const semesters = {
+        Autumn: 'Осенний',
+        Winter: 'Зимний',
+        Spring: 'Весенний',
+        Summer: 'Летний',
+    };
+
+    const statuses = {
+        Created: 'Создан',
+        OpenForAssigning: 'Открыт для записи',
+        Started: 'В процессе обучения',
+        Finished: 'Закрыт',
+    };
+    const statusColor = {
+        Created: 'text.secondary',
+        OpenForAssigning: '#4caf50',
+        Started: '#2196f3',
+        Finished: '#f44336',
+    };
     return (
-        <Card variant='outlined' sx={{ maxWidth: '996px', width: 1 }}>
+        <Card variant='outlined' sx={{ height: 'auto', width: 1, marginBottom: '10px' }}>
             <CardContent>
                 <div className={styles.titleWrapper}>
                     <Typography className={styles.cardTitle} variant='h5' component='div'>
-                        Название группы
+                        {name}
                     </Typography>
-                    <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-                        Статус
+                    <Typography
+                        gutterBottom
+                        sx={{ color: statusColor[status], fontWeight: 500, fontSize: 14 }}
+                    >
+                        {statuses[status]}
                     </Typography>
                 </div>
-                <Typography sx={{ color: 'text.secondary' }}>Год</Typography>
-                <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>Семестр</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{`Год: ${startYear}`}</Typography>
+                <Typography
+                    sx={{ color: 'text.secondary', mb: 1.5 }}
+                >{`Семестр: ${semesters[semester]}`}</Typography>
                 <Typography variant='body2'>
-                    Всего мест
+                    {`Всего мест - ${maximumStudentsCount}`}
                     <br />
-                    {'Свободные места'}
+                    {`Свободные места - ${remainingSlotsCount}`}
                 </Typography>
             </CardContent>
             <CardActions>

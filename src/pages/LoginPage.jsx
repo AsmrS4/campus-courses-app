@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Button } from '@mui/material';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import InputField from '../components/InputField/InputField';
 import { emailIsValid, passwordIsValid } from '../utils/validation/validation';
@@ -13,7 +13,7 @@ const LoginPage = () => {
     const [userEmail, setEmail] = useState('');
     const [userPassword, setPassword] = useState('');
     const [submitDisabled, setDisabled] = useState(true);
-
+    const navigate = useNavigate();
     const formIsEmpty = () => {
         if (userEmail !== '' && userPassword !== '') {
             setDisabled(false);
@@ -31,6 +31,7 @@ const LoginPage = () => {
         if (result.token) {
             console.log(result.token);
             localStorage.setItem('token', result.token);
+            navigate('/groups');
         } else {
             ErrorToast('Неверный логин или пароль');
         }

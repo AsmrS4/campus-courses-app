@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -14,20 +15,30 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import ClassIcon from '@mui/icons-material/Class';
 import SchoolIcon from '@mui/icons-material/School';
 import MenuIcon from '@mui/icons-material/Menu';
+import { logoutUser } from '../../api/account/account';
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = React.useState(false);
-
+    const navigate = useNavigate();
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
-
+    const logout = async () => {
+        await logoutUser();
+        navigate('/login');
+    };
+    const clickProfile = () => {
+        navigate('/profile');
+    };
+    const clickGroups = () => {
+        navigate('/groups');
+    };
     const DrawerList = (
         <Box sx={{ width: 300 }} role='presentation' onClick={toggleDrawer(false)}>
             <List>
                 {['Профиль', 'Выйти'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={index === 0 ? clickProfile : logout}>
                             <ListItemIcon sx={{ color: '#336caf' }}>
                                 {index === 0 ? <AccountCircleIcon /> : <LogoutIcon />}
                             </ListItemIcon>
@@ -40,7 +51,11 @@ export default function TemporaryDrawer() {
             <List>
                 {['Группы', 'Мои курсы', 'Преподаваемые курсы'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton
+                            onClick={
+                                index === 0 ? clickGroups : index === 1 ? clickGroups : clickGroups
+                            }
+                        >
                             <ListItemIcon sx={{ color: '#336caf' }}>
                                 {index === 0 ? (
                                     <GroupsIcon />
