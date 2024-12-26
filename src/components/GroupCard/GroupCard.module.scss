@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.titleWrapper {
+    @include flex-row-x;
+    margin-bottom: 16px;
+}
+
+.cardTitle {
+    max-width: 496px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

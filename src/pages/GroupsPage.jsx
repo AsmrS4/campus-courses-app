@@ -43,14 +43,14 @@ const GroupsPage = () => {
                         </List>
                         <ToastContainer limit={1} />
                     </div>
-                    <Button
+                    {/* <Button
                         variant='contained'
                         sx={{ width: '200px', marginTop: '12px' }}
                         size='large'
                         type='button'
                     >
                         Создать группу
-                    </Button>
+                    </Button> */}
                 </div>
             </section>
         </>
