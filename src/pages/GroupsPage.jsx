@@ -7,8 +7,10 @@ import Item from '../components/Item/Item';
 import { SearchComponent } from '../components/Search/Search';
 import { WarningToast } from '../utils/toast/toast';
 import { ToastContainer } from 'react-toastify';
+import { ERROR_401 } from '../utils/constants';
 
 const GroupsPage = () => {
+    let isAdmin = true;
     const [courses, setCourses] = useState([]);
     const loadData = async () => {
         const result = await getCourses();
@@ -16,7 +18,7 @@ const GroupsPage = () => {
             setCourses(result);
             console.log(result);
         } else {
-            WarningToast('Ваша сессия истекла. Пожалуйста, авторизируйтесь');
+            WarningToast(ERROR_401);
         }
     };
     useEffect(() => {
@@ -36,21 +38,23 @@ const GroupsPage = () => {
                         </div>
                     </div>
                     <div className='groupsHolder'>
-                        <List sx={{ width: 1 }}>
+                        <List sx={{ width: 1, backgroundColor: 'inherit' }}>
                             {courses.map((item, index) => {
-                                return <Item name={item.name} id={item.id} />;
+                                return <Item name={item.name} id={item.id} isAdmin={isAdmin} />;
                             })}
                         </List>
                         <ToastContainer limit={1} />
                     </div>
-                    {/* <Button
-                        variant='contained'
-                        sx={{ width: '200px', marginTop: '12px' }}
-                        size='large'
-                        type='button'
-                    >
-                        Создать группу
-                    </Button> */}
+                    {isAdmin && (
+                        <Button
+                            variant='contained'
+                            sx={{ width: '200px', marginTop: '12px' }}
+                            size='large'
+                            type='button'
+                        >
+                            Создать группу
+                        </Button>
+                    )}
                 </div>
             </section>
         </>

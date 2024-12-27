@@ -10,9 +10,17 @@ const Item = ({ name = '', id = '', isAdmin = false }) => {
     const handleClick = () => {
         navigate(`${id}`);
     };
+    const editClick = () => {
+        alert('edit');
+    };
+    const removeClick = () => {
+        alert('remove');
+    };
     return (
         <>
-            <ListItemButton sx={{ borderRadius: 1, marginY: 1 }}>
+            <ListItemButton
+                sx={{ height: '64px', borderRadius: 1, backgroundColor: '#fff', marginBottom: 1 }}
+            >
                 <ListItemText onClick={handleClick} primary={name} />
                 {isAdmin && (
                     <>
@@ -24,6 +32,7 @@ const Item = ({ name = '', id = '', isAdmin = false }) => {
                                 borderRadius: '50%',
                                 marginRight: '8px',
                             }}
+                            onClick={editClick}
                         />
                         <DeleteIcon
                             sx={{
@@ -33,11 +42,11 @@ const Item = ({ name = '', id = '', isAdmin = false }) => {
                                 borderRadius: '50%',
                                 marginRight: '8px',
                             }}
+                            onClick={removeClick}
                         />
                     </>
                 )}
             </ListItemButton>
-            <Divider />
         </>
     );
 };

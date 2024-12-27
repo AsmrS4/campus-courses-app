@@ -56,3 +56,42 @@ export const logoutUser = async() => {
         console.error('Запрос завершился с ошибкой: ' + error)
     }
 }
+
+export const getUserProfile = async() => {
+    let token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API}/profile`, {
+            method: 'GET',
+            headers: {
+                'Accept': '*/*',
+                'Authorization': 'Bearer ' + token
+            }
+        });
+        
+        return response
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const editUserProfile = async(data) => {
+    let token = localStorage.getItem('token');
+    try {
+        const response = await fetch(`${process.env.REACT_APP_API}/profile`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'text/plain',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer' + token
+            },
+            body: {
+                ...data
+            }
+        });
+        if(response.ok) {
+            return response.json();
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}

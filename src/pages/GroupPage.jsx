@@ -7,6 +7,7 @@ import GroupCard from '../components/GroupCard';
 import Header from '../components/Header';
 import { getCourseById } from '../api/groups/groups';
 import { ErrorToast } from '../utils/toast/toast';
+import { SERVER_ERROR } from '../utils/constants';
 
 const GroupPage = () => {
     const { id } = useParams();
@@ -17,7 +18,7 @@ const GroupPage = () => {
             setCourses(result);
             console.log(result);
         } else {
-            ErrorToast('Не удалось обработать запрос');
+            ErrorToast(SERVER_ERROR);
         }
     };
 

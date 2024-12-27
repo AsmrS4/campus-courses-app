@@ -9,6 +9,7 @@ const InputField = ({
     type = 'text',
     value = '',
     handleChange = null,
+    isDisabled = false,
 }) => {
     const [isError, setIsError] = useState(false);
     const handleValue = (inputValue) => {
@@ -31,6 +32,7 @@ const InputField = ({
                     handleChange(e.target.value);
                     handleValue(e.target.value);
                 }}
+                disabled={isDisabled}
             />
         </>
     );
